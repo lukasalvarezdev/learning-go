@@ -7,6 +7,15 @@ import (
 )
 
 func main() {
+	// arrays()
+	// maps()
+	// loops()
+	// sqrt_example()
+	// make_person()
+	memory_address()
+}
+
+func sqrt_example() {
 	result, error := getSqrt(4)
 
 	if error != nil {
@@ -78,4 +87,45 @@ func loops() {
 	for key, value := range myMap {
 		fmt.Println("for range loop with map: ", key, value)
 	}
+}
+
+type person struct {
+	firstName string
+	lastName  string
+	age       int
+}
+
+func make_person() person {
+	p := person{
+		firstName: "John",
+		lastName:  "Doe",
+		age:       25,
+	}
+
+	return p
+}
+
+func memory_address() {
+	num := 10
+
+	// useless, won't change the value of num
+	increment_copy(num)
+
+	// will change the value of num, note the & to pass the pointer
+	increment_real(&num)
+
+	fmt.Println("Memory address of num: ", &num)
+	fmt.Println("Increased num: ", num)
+}
+
+func increment_copy(num int) {
+	// num is a copy of the original value, so the original value is not changed
+	num++
+}
+
+// note the * to receive the pointer
+func increment_real(num *int) {
+	// num is a pointer to the original value, so the original value is changed
+	// the * is used to dereference the pointer
+	*num++
 }
