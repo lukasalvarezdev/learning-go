@@ -17,12 +17,12 @@ func main() {
 	}
 }
 
-type person struct {
+type Person struct {
 	name    string
 	tickets int
 }
 
-func getBookings(remainingTickets uint) (remaining uint, bookings []person) {
+func getBookings(remainingTickets uint) (remaining uint, bookings []Person) {
 	for remainingTickets > 0 {
 		name, email, tickets := getUserInfo(remainingTickets)
 
@@ -48,7 +48,8 @@ func getBookings(remainingTickets uint) (remaining uint, bookings []person) {
 			continue
 		}
 
-		bookings = append(bookings, person{name, tickets})
+		var person = Person{name, tickets}
+		bookings = append(bookings, person)
 		remainingTickets -= uint(tickets)
 	}
 
