@@ -28,17 +28,17 @@ func getBookings(remainingTickets uint) (remaining uint, bookings []person) {
 
 		isValidName, isValidEmail, isValidTickets := validateUserData(name, email, tickets)
 
-		if isValidName == false {
+		if !isValidName {
 			fmt.Printf("%s is not a valid name\n", name)
 			continue
 		}
 
-		if isValidEmail == false {
+		if !isValidEmail {
 			fmt.Printf("%s is not a valid email\n", email)
 			continue
 		}
 
-		if isValidTickets == false {
+		if !isValidTickets {
 			fmt.Println("Invalid number of tickets, must be greater than 0")
 			continue
 		}
