@@ -17,8 +17,6 @@ func getBookings(remainingTickets uint) (remaining uint, bookings []string) {
 	for remainingTickets > 0 {
 		firstName, tickets := getUserInfo(remainingTickets)
 
-		bookings = append(bookings, firstName)
-
 		if tickets < 0 {
 			fmt.Println("Invalid number of tickets, must be greater than 0")
 			continue
@@ -29,6 +27,7 @@ func getBookings(remainingTickets uint) (remaining uint, bookings []string) {
 			continue
 		}
 
+		bookings = append(bookings, firstName)
 		remainingTickets -= uint(tickets)
 	}
 
