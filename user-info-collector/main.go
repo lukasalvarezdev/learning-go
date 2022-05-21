@@ -7,15 +7,36 @@ import (
 )
 
 func main() {
+	GetUserInfo()
 	// arrays()
 	// maps()
 	// loops()
-	// sqrt_example()
-	// make_person()
-	memory_address()
+	// sqrtExample()
+	// makePerson()
+	// memoryAddress()
+	// formatTextExample()
 }
 
-func sqrt_example() {
+func preventNegaiveNumbers() {
+	var remainingTickets uint = 50
+	// will give an error, because unit cannot be negative
+	// remainingTickets = -1
+
+	fmt.Println("Remaining tickets: ", remainingTickets)
+}
+
+func subtract(a int, b int) int {
+	return a - b
+}
+
+func formatTextExample() {
+	const userName = "Luki"
+	const userAge = 25
+
+	fmt.Printf("User: %v is %v years old \n", userName, userAge)
+}
+
+func sqrtExample() {
 	result, error := getSqrt(4)
 
 	if error != nil {
@@ -95,7 +116,7 @@ type person struct {
 	age       int
 }
 
-func make_person() person {
+func makePerson() person {
 	p := person{
 		firstName: "John",
 		lastName:  "Doe",
@@ -105,26 +126,26 @@ func make_person() person {
 	return p
 }
 
-func memory_address() {
+func memoryAddress() {
 	num := 10
 
 	// useless, won't change the value of num
-	increment_copy(num)
+	incrementCopy(num)
 
 	// will change the value of num, note the & to pass the pointer
-	increment_real(&num)
+	incrementReal(&num)
 
 	fmt.Println("Memory address of num: ", &num)
 	fmt.Println("Increased num: ", num)
 }
 
-func increment_copy(num int) {
+func incrementCopy(num int) {
 	// num is a copy of the original value, so the original value is not changed
 	num++
 }
 
 // note the * to receive the pointer
-func increment_real(num *int) {
+func incrementReal(num *int) {
 	// num is a pointer to the original value, so the original value is changed
 	// the * is used to dereference the pointer
 	*num++
