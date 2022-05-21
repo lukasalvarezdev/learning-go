@@ -10,12 +10,20 @@ func main() {
 	remainingTickets, bookings := getBookings(totalTickets)
 
 	fmt.Printf("%s sold %d tickets, %d tickets remaining\n", conferenceName, len(bookings), remainingTickets)
-	fmt.Println("Bookings:", bookings)
+
+	for _, booking := range bookings {
+		fmt.Printf("%s booked %d tickets\n", booking.name, booking.tickets)
+	}
 }
 
-func getBookings(remainingTickets uint) (remaining uint, bookings []string) {
+type person struct {
+	name    string
+	tickets int
+}
+
+func getBookings(remainingTickets uint) (remaining uint, bookings []person) {
 	for remainingTickets > 0 {
-		firstName, tickets := getUserInfo(remainingTickets)
+		name, tickets := getUserInfo(remainingTickets)
 
 		if tickets < 0 {
 			fmt.Println("Invalid number of tickets, must be greater than 0")
@@ -27,19 +35,19 @@ func getBookings(remainingTickets uint) (remaining uint, bookings []string) {
 			continue
 		}
 
-		bookings = append(bookings, firstName)
+		bookings = append(bookings, person{name, tickets})
 		remainingTickets -= uint(tickets)
 	}
 
 	return remainingTickets, bookings
 }
 
-func getUserInfo(remainingTickets uint) (firstName string, tickets int) {
-	fmt.Printf("Welcome to Luki's concert, there are %v tickets remaining, please enter your first name: \n", remainingTickets)
-	fmt.Scanln(&firstName)
+func getUserInfo(remainingTickets uint) (name string, tickets int) {
+	fmt.Printf("Welcome to Luki's concert, there are %v tickets remaining, please enter your name: \n", remainingTickets)
+	fmt.Scanln(&name)
 
 	fmt.Print("How many tickets do you want? \n")
 	fmt.Scanln(&tickets)
 
-	return firstName, tickets
+	return name, tickets
 }
