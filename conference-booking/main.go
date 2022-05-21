@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	mail "net/mail"
 )
 
 func main() {
@@ -23,9 +24,21 @@ type person struct {
 
 func getBookings(remainingTickets uint) (remaining uint, bookings []person) {
 	for remainingTickets > 0 {
-		name, tickets := getUserInfo(remainingTickets)
+		name, email, tickets := getUserInfo(remainingTickets)
 
-		if tickets < 0 {
+		isValidName, isValidEmail, isValidTickets := validateUserData(name, email, tickets)
+
+		if isValidName == false {
+			fmt.Printf("%s is not a valid name\n", name)
+			continue
+		}
+
+		if isValidEmail == false {
+			fmt.Printf("%s is not a valid email\n", email)
+			continue
+		}
+
+		if isValidTickets == false {
 			fmt.Println("Invalid number of tickets, must be greater than 0")
 			continue
 		}
@@ -42,12 +55,32 @@ func getBookings(remainingTickets uint) (remaining uint, bookings []person) {
 	return remainingTickets, bookings
 }
 
-func getUserInfo(remainingTickets uint) (name string, tickets int) {
+func getUserInfo(remainingTickets uint) (name string, email string, tickets int) {
 	fmt.Printf("Welcome to Luki's concert, there are %v tickets remaining, please enter your name: \n", remainingTickets)
 	fmt.Scanln(&name)
 
-	fmt.Print("How many tickets do you want? \n")
+	fmt.Println("Please enter your email: ")
+	fmt.Scanln(&email)
+
+	fmt.Println("Please enter the number of tickets you would like to purchase:")
 	fmt.Scanln(&tickets)
 
-	return name, tickets
+	return
+}
+
+func validateUserData(name string, email string, tickets int) (bool, bool, bool) {
+	return validateName(name), validateTickets(tickets), validateEmail(email)
+}
+
+func validateName(name string) bool {
+	return len(name) > 2
+}
+
+func validateTickets(tickets int) bool {
+	return tickets > 0
+}
+
+func validateEmail(email string) bool {
+	_, err := mail.ParseAddress(email)
+	return err == nil
 }
