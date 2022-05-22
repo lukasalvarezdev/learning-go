@@ -5,5 +5,5 @@ worry, I will get better 😉😎.
 ## Project walkthrough
 - `rookie` All my rookie things, just learning the syntax and basic stuff.
 - `conference-booking` Simple app where you can book tickets for a concert.
-- `concurrency` Concurrency and goroutines examples
+- `concurrence` Concurrency and goroutines examples
 
