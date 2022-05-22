@@ -8,18 +8,18 @@ import (
 )
 
 func main() {
-	var withAsync string
+	var withSync string
 
 	fmt.Println("Do you want to use the async feature? (y/n)")
-	fmt.Scanln(&withAsync)
+	fmt.Scanln(&withSync)
 
-	if withAsync != "y" && withAsync != "n" {
+	if withSync != "y" && withSync != "n" {
 		fmt.Println("Come on, is it so hard to choose? (y/n)")
 		os.Exit(0)
 	}
 
-	if withAsync == "y" {
-		syncRoute()
+	if withSync == "y" {
+		syncRoutine()
 	} else {
 		asyncRoutine()
 	}
@@ -57,7 +57,7 @@ func asyncRoutine() {
 
 var wg = sync.WaitGroup{}
 
-func syncRoute() {
+func syncRoutine() {
 	balance, expenseName, expenseQuantity := getUserData()
 
 	// wg is basically a number of threads, Add() adds threads to the wait group
